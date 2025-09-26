@@ -1,8 +1,9 @@
-// src/pages/NoteView.jsx
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './NoteView.css';
+
+const BACKEND_URL = "https://multi-tenant-notes-fawn.vercel.app";
 
 const NoteView = ({ user }) => {
   const { noteId } = useParams();
@@ -14,7 +15,7 @@ const NoteView = ({ user }) => {
     const fetchNote = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get(`http://localhost:4000/notes/${noteId}`, {
+        const res = await axios.get(`${BACKEND_URL}/notes/${noteId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setNote(res.data);

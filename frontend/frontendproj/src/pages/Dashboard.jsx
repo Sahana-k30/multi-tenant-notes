@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Dashboard.css';
 
+const BACKEND_URL = "https://multi-tenant-notes-fawn.vercel.app"; // your deployed backend
+
 const Dashboard = ({ user }) => {
   const navigate = useNavigate();
   const [notes, setNotes] = useState([]);
@@ -17,7 +19,7 @@ const Dashboard = ({ user }) => {
   const fetchNotes = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:4000/notes', {
+      const res = await axios.get(`${BACKEND_URL}/notes`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setNotes(res.data);
@@ -34,17 +36,14 @@ const Dashboard = ({ user }) => {
     navigate('/');
   };
 
-  // Admin actions
   const handleUpgrade = async () => {
     try {
       const token = localStorage.getItem('token');
-      await axios.post(
-        `http://localhost:4000/tenants/${user.tenant.slug}/upgrade`,
-        {},
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      await axios.post(`${BACKEND_URL}/tenants/${user.tenant.slug}/upgrade`, {}, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       alert('Tenant upgraded to PRO');
-      window.location.reload();
+      fetchNotes();
     } catch (err) {
       console.error(err);
       alert('Upgrade failed');
@@ -56,11 +55,9 @@ const Dashboard = ({ user }) => {
     if (!email) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.post(
-        `http://localhost:4000/tenants/${user.tenant.slug}/invite`,
-        { email },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      await axios.post(`${BACKEND_URL}/tenants/${user.tenant.slug}/invite`, { email }, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       alert('User invited successfully');
     } catch (err) {
       console.error(err);
@@ -68,12 +65,11 @@ const Dashboard = ({ user }) => {
     }
   };
 
-  // Member note actions
   const handleCreateNote = async () => {
     if (!newNote.title || !newNote.content) return alert('Please fill all fields');
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:4000/notes', newNote, {
+      await axios.post(`${BACKEND_URL}/notes`, newNote, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setNewNote({ title: '', content: '' });
@@ -90,7 +86,7 @@ const Dashboard = ({ user }) => {
     if (!title || !content) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.put(`http://localhost:4000/notes/${note._id}`, { title, content }, {
+      await axios.put(`${BACKEND_URL}/notes/${note._id}`, { title, content }, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchNotes();
@@ -104,7 +100,7 @@ const Dashboard = ({ user }) => {
     if (!window.confirm('Are you sure to delete this note?')) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:4000/notes/${id}`, {
+      await axios.delete(`${BACKEND_URL}/notes/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchNotes();
@@ -119,7 +115,6 @@ const Dashboard = ({ user }) => {
 
   return (
     <div className="dashboard-container">
-      {/* Header */}
       <div className="dashboard-header">
         <div className="header-title">
           <h1>Multi-Tenancy Dashboard</h1>
@@ -133,7 +128,6 @@ const Dashboard = ({ user }) => {
         </div>
       </div>
 
-      {/* Admin actions */}
       {user.role === 'ADMIN' && (
         <div className="admin-actions">
           <button onClick={handleUpgrade} className="admin-btn">Upgrade to PRO</button>
@@ -141,11 +135,8 @@ const Dashboard = ({ user }) => {
         </div>
       )}
 
-      {/* Notes Section */}
       <div className="notes-section">
         <h2>Notes / Nodes</h2>
-
-        {/* Member Create Note */}
         {user.role === 'MEMBER' && (
           <div className="create-note">
             <input

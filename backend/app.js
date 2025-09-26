@@ -9,7 +9,7 @@ const notesRoutes = require('./routes/notes');
 
 const app = express();
 
-app.use(cors({ origin: 'http://localhost:3000', credentials: true })); // change if Vite port 5173
+app.use(cors({ origin: ['https://multi-tenant-notes-e2ac.vercel.app/','http://localhost:3000'], credentials: true })); // change if Vite port 5173
 app.use(express.json());
 
 // Health endpoint (required by the assignment)

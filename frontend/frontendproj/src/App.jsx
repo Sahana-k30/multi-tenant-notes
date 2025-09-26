@@ -4,7 +4,6 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import NoteView from './pages/NoteView';
 import CreateTenant from './pages/CreateTenant';
- // ✅ Import NoteView component
 import './App.css';
 
 const App = () => {
@@ -24,18 +23,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Login setUser={setUser} />} />
         <Route path="/createtenant" element={<CreateTenant />} />
-
-        {/* Dashboard route */}
-        <Route
-          path="/dashboard/:slug"
-          element={user ? <Dashboard user={user} /> : <Navigate to="/" />}
-        />
-
-        {/* Note view route */}
-        <Route
-          path="/notes/:noteId"
-          element={user ? <NoteView user={user} /> : <Navigate to="/" />}
-        />
+        <Route path="/dashboard/:slug" element={user ? <Dashboard user={user} /> : <Navigate to="/" />} />
+        <Route path="/notes/:noteId" element={user ? <NoteView user={user} /> : <Navigate to="/" />} />
       </Routes>
     </Router>
   );

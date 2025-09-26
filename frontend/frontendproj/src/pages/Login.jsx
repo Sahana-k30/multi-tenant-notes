@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+const BACKEND_URL = "https://multi-tenant-notes-fawn.vercel.app";
 
 const Login = ({ setUser }) => {
   const [email, setEmail] = useState('');
@@ -11,7 +13,7 @@ const Login = ({ setUser }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:4000/auth/login', { email, password });
+      const res = await axios.post(`${BACKEND_URL}/auth/login`, { email, password });
       const { token, user } = res.data;
 
       localStorage.setItem('token', token);
