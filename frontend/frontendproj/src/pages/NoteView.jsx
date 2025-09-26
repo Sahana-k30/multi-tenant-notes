@@ -5,6 +5,7 @@ import './NoteView.css';
 
 const BACKEND_URL = "https://multi-tenant-notes-fawn.vercel.app";
 
+
 const NoteView = ({ user }) => {
   const { noteId } = useParams();
   const navigate = useNavigate();

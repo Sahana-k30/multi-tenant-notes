@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Dashboard.css';
 
-const BACKEND_URL = "https://multi-tenant-notes-fawn.vercel.app"; // your deployed backend
+const BACKEND_URL = "https://multi-tenant-notes-fawn.vercel.app";
+ // your deployed backend
 
 const Dashboard = ({ user }) => {
   const navigate = useNavigate();
