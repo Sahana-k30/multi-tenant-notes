@@ -1,0 +1,133 @@
+.dashboard-container {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #f7f9fc;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.header-title h1 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.subtitle {
+  color: #7f8c8d;
+  font-size: 14px;
+}
+
+.header-user-info p {
+  margin: 3px 0;
+  font-size: 14px;
+}
+
+.logout-btn {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.logout-btn:hover {
+  background: #c0392b;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.admin-btn {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 7px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.admin-btn:hover {
+  background: #2980b9;
+}
+
+.notes-section h2 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.create-note input {
+  padding: 7px;
+  margin-right: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.create-note button {
+  padding: 7px 12px;
+  border: none;
+  border-radius: 5px;
+  background: #27ae60;
+  color: white;
+  cursor: pointer;
+}
+
+.create-note button:hover {
+  background: #1e8449;
+}
+
+.notes-list {
+  list-style: none;
+  padding: 0;
+}
+
+.notes-list li {
+  background: white;
+  margin-bottom: 10px;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.note-buttons {
+  margin-top: 8px;
+}
+
+.note-buttons button {
+  margin-right: 5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.note-buttons button:hover {
+  opacity: 0.8;
+}
+
+.note-buttons button:nth-child(1) {
+  background: #f1c40f;
+  color: #fff;
+} /* Edit */
+.note-buttons button:nth-child(2) {
+  background: #e74c3c;
+  color: #fff;
+} /* Delete */
+.note-buttons button:nth-child(3) {
+  background: #3498db;
+  color: #fff;
+} /* View */

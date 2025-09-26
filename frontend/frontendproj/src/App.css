@@ -1,0 +1,128 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #f4f6f9;
+  color: #333;
+}
+
+/* App Title */
+.app-title {
+  text-align: center;
+  padding: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  background: #2c3e50;
+  color: #ecf0f1;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+}
+
+/* Login Box */
+.login-container {
+  max-width: 400px;
+  margin: 50px auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.login-container button {
+  width: 100%;
+  padding: 12px;
+  background: #2980b9;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s;
+}
+
+.login-container button:hover {
+  background: #1f5f87;
+}
+
+.login-container p {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* Dashboard */
+.dashboard-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dashboard-header h2 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.dashboard-header button {
+  padding: 10px 20px;
+  background: #c0392b;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.dashboard-header button:hover {
+  background: #992d22;
+}
+
+.notes-list {
+  margin-top: 20px;
+}
+
+.notes-list h3 {
+  color: #34495e;
+  margin-bottom: 10px;
+}
+
+.notes-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.notes-list li {
+  padding: 15px;
+  margin: 10px 0;
+  background: #ecf0f1;
+  border-radius: 8px;
+}
+
+.notes-list li h4 {
+  margin: 0 0 5px 0;
+  color: #2c3e50;
+}
