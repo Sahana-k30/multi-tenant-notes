@@ -1,6 +1,6 @@
 #MULTI TENANT NOTES
 
-Multi tenant notes is a **Saas Application** which allows multiple tenants(atleast two tenants namely acme and globex) to secure their tenants(company) users data and notes by implementing tenant isolation.
+Multi tenant notes is a **Saas Application** which allows multiple tenants(atleast two tenants namely acme and globex) to secure their tenants(company) users data and notes using the approach of **Shared Database,shared schema** by implementing tenant isolation.
 
 ##FEATURES
 --The **authentication and Authorization is implemented** on the login of admin and Member of the tenant.
