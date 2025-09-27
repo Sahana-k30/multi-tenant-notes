@@ -3,8 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './NoteView.css';
 
-const BACKEND_URL = "https://multi-tenant-notes-fawn.vercel.app";
-
+const BACKEND_URL = "http://localhost:4000";
 
 const NoteView = ({ user }) => {
   const { noteId } = useParams();
@@ -34,31 +33,16 @@ const NoteView = ({ user }) => {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <div className="noteview-container">
-      <div className="noteview-header">
-        <h2>View Note</h2>
-        <button
-          className="logout-btn"
-          onClick={() => {
-            localStorage.removeItem('token');
-            localStorage.removeItem('user');
-            navigate('/');
-          }}
-        >
-          Logout
-        </button>
-      </div>
-
+    <div>
       {note ? (
-        <div className="noteview-content">
+        <>
           <h3>{note.title}</h3>
           <p>{note.content}</p>
-        </div>
+        </>
       ) : (
         <p>Note not found</p>
       )}
-
-      <button className="back-btn" onClick={() => navigate(-1)}>Back</button>
+      <button onClick={() => navigate(-1)}>Back</button>
     </div>
   );
 };

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const BACKEND_URL = "https://multi-tenant-notes-fawn.vercel.app";
+const BASE_URL='http://localhost:4000';
 
 
 const Login = ({ setUser }) => {
@@ -14,7 +14,7 @@ const Login = ({ setUser }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${BACKEND_URL}/auth/login`, { email, password });
+      const res = await axios.post(`${BASE_URL}/auth/login`, { email, password });
       const { token, user } = res.data;
 
       localStorage.setItem('token', token);
@@ -30,20 +30,8 @@ const Login = ({ setUser }) => {
     <div className="login-container">
       <h2>Login to Tenant</h2>
       <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Enter Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Enter Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+        <input type="email" placeholder="Enter Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        <input type="password" placeholder="Enter Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
         <button type="submit">Login</button>
       </form>
       {error && <p style={{ color: 'red' }}>{error}</p>}

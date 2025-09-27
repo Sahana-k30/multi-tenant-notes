@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Dashboard.css';
 
-const BACKEND_URL = "https://multi-tenant-notes-fawn.vercel.app";
- // your deployed backend
+const BASE_URL='http://localhost:4000';
+
 
 const Dashboard = ({ user }) => {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const Dashboard = ({ user }) => {
   const fetchNotes = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get(`${BACKEND_URL}/notes`, {
+      const res = await axios.get(`${BASE_URL}/notes`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setNotes(res.data);
@@ -40,11 +40,13 @@ const Dashboard = ({ user }) => {
   const handleUpgrade = async () => {
     try {
       const token = localStorage.getItem('token');
-      await axios.post(`${BACKEND_URL}/tenants/${user.tenant.slug}/upgrade`, {}, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.post(
+        `${BASE_URL}/tenants/${user.tenant.slug}/upgrade`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
       alert('Tenant upgraded to PRO');
-      fetchNotes();
+      window.location.reload();
     } catch (err) {
       console.error(err);
       alert('Upgrade failed');
@@ -56,9 +58,11 @@ const Dashboard = ({ user }) => {
     if (!email) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.post(`${BACKEND_URL}/tenants/${user.tenant.slug}/invite`, { email }, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.post(
+        `${BASE_URL}/tenants/${user.tenant.slug}/invite`,
+        { email },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
       alert('User invited successfully');
     } catch (err) {
       console.error(err);
@@ -70,7 +74,7 @@ const Dashboard = ({ user }) => {
     if (!newNote.title || !newNote.content) return alert('Please fill all fields');
     try {
       const token = localStorage.getItem('token');
-      await axios.post(`${BACKEND_URL}/notes`, newNote, {
+      await axios.post('${BASE_URL}/notes', newNote, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setNewNote({ title: '', content: '' });
@@ -87,7 +91,7 @@ const Dashboard = ({ user }) => {
     if (!title || !content) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.put(`${BACKEND_URL}/notes/${note._id}`, { title, content }, {
+      await axios.put(`${BASE_URL}/notes/${note._id}`, { title, content }, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchNotes();
@@ -101,7 +105,7 @@ const Dashboard = ({ user }) => {
     if (!window.confirm('Are you sure to delete this note?')) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`${BACKEND_URL}/notes/${id}`, {
+      await axios.delete(`${BASE_URL}/notes/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchNotes();
@@ -136,48 +140,45 @@ const Dashboard = ({ user }) => {
         </div>
       )}
 
-      <div className="notes-section">
-        <h2>Notes / Nodes</h2>
-        {user.role === 'MEMBER' && (
-          <div className="create-note">
-            <input
-              type="text"
-              placeholder="Title"
-              value={newNote.title}
-              onChange={(e) => setNewNote({ ...newNote, title: e.target.value })}
-            />
-            <input
-              type="text"
-              placeholder="Content"
-              value={newNote.content}
-              onChange={(e) => setNewNote({ ...newNote, content: e.target.value })}
-            />
-            <button onClick={handleCreateNote}>Create Note</button>
-          </div>
-        )}
+      {user.role === 'MEMBER' && (
+        <div className="create-note">
+          <input
+            type="text"
+            placeholder="Title"
+            value={newNote.title}
+            onChange={(e) => setNewNote({ ...newNote, title: e.target.value })}
+          />
+          <input
+            type="text"
+            placeholder="Content"
+            value={newNote.content}
+            onChange={(e) => setNewNote({ ...newNote, content: e.target.value })}
+          />
+          <button onClick={handleCreateNote}>Create Note</button>
+        </div>
+      )}
 
-        <ul className="notes-list">
-          {notes.length === 0 ? (
-            <p>No notes available.</p>
-          ) : (
-            notes.map((note) => (
-              <li key={note._id}>
-                <h4>{note.title}</h4>
-                <p>{note.content.substring(0, 50)}...</p>
-                <div className="note-buttons">
-                  {user.role === 'MEMBER' && (
-                    <>
-                      <button onClick={() => handleEditNote(note)}>Edit</button>
-                      <button onClick={() => handleDeleteNote(note._id)}>Delete</button>
-                    </>
-                  )}
-                  <button onClick={() => navigate(`/notes/${note._id}`)}>View</button>
-                </div>
-              </li>
-            ))
-          )}
-        </ul>
-      </div>
+      <ul className="notes-list">
+        {notes.length === 0 ? (
+          <p>No notes available.</p>
+        ) : (
+          notes.map((note) => (
+            <li key={note._id}>
+              <h4>{note.title}</h4>
+              <p>{note.content.substring(0, 50)}...</p>
+              <div className="note-buttons">
+                {user.role === 'MEMBER' && (
+                  <>
+                    <button onClick={() => handleEditNote(note)}>Edit</button>
+                    <button onClick={() => handleDeleteNote(note._id)}>Delete</button>
+                  </>
+                )}
+                <button onClick={() => navigate(`/notes/${note._id}`)}>View</button>
+              </div>
+            </li>
+          ))
+        )}
+      </ul>
     </div>
   );
 };

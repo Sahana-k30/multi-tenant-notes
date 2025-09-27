@@ -1,37 +1,56 @@
+/* NoteView.css */
+
 .noteview-container {
-  max-width: 700px;
+  max-width: 800px;
   margin: 40px auto;
-  padding: 25px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.15);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .noteview-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .noteview-header h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
   color: #1d4ed8;
 }
 
 .noteview-content {
   margin-top: 20px;
-  padding: 15px;
-  background: #f3f4f6;
+  padding: 20px;
+  background: #f9fafb;
   border-radius: 8px;
+  border: 1px solid #e5e7eb;
 }
 
 .noteview-content h3 {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   margin-bottom: 10px;
+  color: #111827;
 }
 
 .noteview-content p {
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #374151;
+}
+
+/* Buttons */
+.btn-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 25px;
+  gap: 12px;
 }
 
 .logout-btn,
@@ -39,17 +58,24 @@
   background-color: #1d4ed8;
   color: #fff;
   border: none;
-  padding: 8px 15px;
-  border-radius: 5px;
+  padding: 10px 18px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: 0.2s;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
 }
 
 .logout-btn:hover,
 .back-btn:hover {
   background-color: #2563eb;
+  transform: translateY(-2px);
 }
 
-.back-btn {
-  margin-top: 20px;
+.logout-btn {
+  background-color: #dc2626;
+}
+
+.logout-btn:hover {
+  background-color: #b91c1c;
 }

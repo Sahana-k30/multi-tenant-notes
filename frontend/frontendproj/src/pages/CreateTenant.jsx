@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './CreateTenant.css';
 
+const BACKEND_URL = "https://multi-tenant-notes-fawn.vercel.app";
+
 const CreateTenant = () => {
   const [name, setName] = useState('');
   const [domain, setDomain] = useState('');
@@ -13,7 +15,7 @@ const CreateTenant = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:4000/tenants', { name, domain, plan });
+      const res = await axios.post(`${BACKEND_URL}/tenants`, { name, domain, plan });
       alert('Tenant created successfully');
       navigate('/'); // Redirect to login page
     } catch (err) {
