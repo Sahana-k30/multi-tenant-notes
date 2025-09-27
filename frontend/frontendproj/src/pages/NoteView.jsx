@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './NoteView.css';
 
-const BACKEND_URL = "http://localhost:4000";
+const BACKEND_URL = "https://tenantnewbe.vercel.app";
 
 const NoteView = ({ user }) => {
   const { noteId } = useParams();

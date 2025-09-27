@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Dashboard.css';
 
-const BASE_URL='http://localhost:4000';
+const BASE_URL='https://tenantnewbe.vercel.app';
 
 
 const Dashboard = ({ user }) => {
